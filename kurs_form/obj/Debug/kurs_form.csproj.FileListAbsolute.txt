@@ -1,0 +1,9 @@
+D:\Visual Studio\kurs_form\kurs_form\bin\Debug\kurs_form.exe.config
+D:\Visual Studio\kurs_form\kurs_form\bin\Debug\kurs_form.exe
+D:\Visual Studio\kurs_form\kurs_form\bin\Debug\kurs_form.pdb
+D:\Visual Studio\kurs_form\kurs_form\obj\Debug\kurs_form.csprojAssemblyReference.cache
+D:\Visual Studio\kurs_form\kurs_form\obj\Debug\kurs_form.Form1.resources
+D:\Visual Studio\kurs_form\kurs_form\obj\Debug\kurs_form.Properties.Resources.resources
+D:\Visual Studio\kurs_form\kurs_form\obj\Debug\kurs_form.csproj.GenerateResource.cache
+D:\Visual Studio\kurs_form\kurs_form\obj\Debug\kurs_form.exe
+D:\Visual Studio\kurs_form\kurs_form\obj\Debug\kurs_form.pdb
