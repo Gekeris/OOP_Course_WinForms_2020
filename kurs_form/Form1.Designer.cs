@@ -47,15 +47,19 @@
 			this.NameTextBox = new System.Windows.Forms.TextBox();
 			this.SurnameTextBox = new System.Windows.Forms.TextBox();
 			this.label6 = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
+			this.SalaryLabel = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.SalaryNumericUpDown = new System.Windows.Forms.NumericUpDown();
 			this.TimeNumericUpDown = new System.Windows.Forms.NumericUpDown();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.PerHourRadioButton = new System.Windows.Forms.RadioButton();
+			this.FixedRadioButton = new System.Windows.Forms.RadioButton();
 			((System.ComponentModel.ISupportInitialize)(this.SalaryNumericUpDown)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.TimeNumericUpDown)).BeginInit();
+			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// richTextBox1
@@ -77,7 +81,7 @@
 			// 
 			// textBox4
 			// 
-			this.textBox4.Location = new System.Drawing.Point(448, 193);
+			this.textBox4.Location = new System.Drawing.Point(355, 158);
 			this.textBox4.Name = "textBox4";
 			this.textBox4.Size = new System.Drawing.Size(100, 20);
 			this.textBox4.TabIndex = 51;
@@ -104,7 +108,7 @@
 			// 
 			// PayButton
 			// 
-			this.PayButton.Location = new System.Drawing.Point(356, 193);
+			this.PayButton.Location = new System.Drawing.Point(263, 158);
 			this.PayButton.Name = "PayButton";
 			this.PayButton.Size = new System.Drawing.Size(75, 23);
 			this.PayButton.TabIndex = 48;
@@ -128,6 +132,7 @@
 			this.NextButton.TabIndex = 46;
 			this.NextButton.Text = "Next";
 			this.NextButton.UseVisualStyleBackColor = true;
+			this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
 			// 
 			// UpdateButton
 			// 
@@ -156,6 +161,7 @@
 			this.PrevButton.TabIndex = 43;
 			this.PrevButton.Text = "Prev";
 			this.PrevButton.UseVisualStyleBackColor = true;
+			this.PrevButton.Click += new System.EventHandler(this.PrevButton_Click);
 			// 
 			// FirstButton
 			// 
@@ -177,7 +183,7 @@
             "Методист",
             "Електрик",
             "Ректор"});
-			this.PostComboBox.Location = new System.Drawing.Point(157, 136);
+			this.PostComboBox.Location = new System.Drawing.Point(121, 106);
 			this.PostComboBox.Name = "PostComboBox";
 			this.PostComboBox.Size = new System.Drawing.Size(100, 21);
 			this.PostComboBox.TabIndex = 41;
@@ -185,7 +191,7 @@
 			// radioButton2
 			// 
 			this.radioButton2.AutoSize = true;
-			this.radioButton2.Location = new System.Drawing.Point(583, 85);
+			this.radioButton2.Location = new System.Drawing.Point(6, 43);
 			this.radioButton2.Name = "radioButton2";
 			this.radioButton2.Size = new System.Drawing.Size(77, 17);
 			this.radioButton2.TabIndex = 40;
@@ -196,7 +202,7 @@
 			// 
 			this.radioButton1.AutoSize = true;
 			this.radioButton1.Checked = true;
-			this.radioButton1.Location = new System.Drawing.Point(583, 61);
+			this.radioButton1.Location = new System.Drawing.Point(6, 19);
 			this.radioButton1.Name = "radioButton1";
 			this.radioButton1.Size = new System.Drawing.Size(75, 17);
 			this.radioButton1.TabIndex = 39;
@@ -206,82 +212,88 @@
 			// 
 			// PatronymicTextBox
 			// 
-			this.PatronymicTextBox.Location = new System.Drawing.Point(157, 111);
+			this.PatronymicTextBox.Location = new System.Drawing.Point(121, 81);
 			this.PatronymicTextBox.Name = "PatronymicTextBox";
 			this.PatronymicTextBox.Size = new System.Drawing.Size(100, 20);
 			this.PatronymicTextBox.TabIndex = 36;
 			// 
 			// NameTextBox
 			// 
-			this.NameTextBox.Location = new System.Drawing.Point(157, 82);
+			this.NameTextBox.Location = new System.Drawing.Point(121, 52);
 			this.NameTextBox.Name = "NameTextBox";
 			this.NameTextBox.Size = new System.Drawing.Size(100, 20);
 			this.NameTextBox.TabIndex = 35;
 			// 
 			// SurnameTextBox
 			// 
-			this.SurnameTextBox.Location = new System.Drawing.Point(157, 56);
+			this.SurnameTextBox.Location = new System.Drawing.Point(121, 26);
 			this.SurnameTextBox.Name = "SurnameTextBox";
 			this.SurnameTextBox.Size = new System.Drawing.Size(100, 20);
 			this.SurnameTextBox.TabIndex = 34;
 			// 
 			// label6
 			// 
-			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(66, 191);
+			this.label6.Location = new System.Drawing.Point(30, 161);
 			this.label6.Name = "label6";
+			this.label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
 			this.label6.Size = new System.Drawing.Size(85, 13);
 			this.label6.TabIndex = 33;
 			this.label6.Text = "Кількість годин";
+			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label5
+			// SalaryLabel
 			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(90, 165);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(61, 13);
-			this.label5.TabIndex = 32;
-			this.label5.Text = "Ціна 1 год.";
+			this.SalaryLabel.Location = new System.Drawing.Point(48, 135);
+			this.SalaryLabel.Name = "SalaryLabel";
+			this.SalaryLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+			this.SalaryLabel.Size = new System.Drawing.Size(67, 13);
+			this.SalaryLabel.TabIndex = 32;
+			this.SalaryLabel.Text = "Ціна 1 год.";
+			this.SalaryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// label4
 			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(106, 139);
+			this.label4.Location = new System.Drawing.Point(70, 109);
 			this.label4.Name = "label4";
+			this.label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
 			this.label4.Size = new System.Drawing.Size(45, 13);
 			this.label4.TabIndex = 31;
 			this.label4.Text = "Посада";
+			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// label3
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(84, 114);
+			this.label3.Location = new System.Drawing.Point(48, 84);
 			this.label3.Name = "label3";
+			this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
 			this.label3.Size = new System.Drawing.Size(67, 13);
 			this.label3.TabIndex = 30;
 			this.label3.Text = "По-батькові";
+			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// label2
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(125, 85);
+			this.label2.Location = new System.Drawing.Point(89, 55);
 			this.label2.Name = "label2";
+			this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
 			this.label2.Size = new System.Drawing.Size(26, 13);
 			this.label2.TabIndex = 29;
 			this.label2.Text = "Ім\'я";
+			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// label1
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(95, 59);
+			this.label1.Location = new System.Drawing.Point(59, 29);
 			this.label1.Name = "label1";
+			this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
 			this.label1.Size = new System.Drawing.Size(56, 13);
 			this.label1.TabIndex = 28;
 			this.label1.Text = "Прізвище";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// SalaryNumericUpDown
 			// 
-			this.SalaryNumericUpDown.Location = new System.Drawing.Point(157, 163);
+			this.SalaryNumericUpDown.Location = new System.Drawing.Point(121, 133);
 			this.SalaryNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -294,7 +306,7 @@
 			// 
 			// TimeNumericUpDown
 			// 
-			this.TimeNumericUpDown.Location = new System.Drawing.Point(157, 189);
+			this.TimeNumericUpDown.Location = new System.Drawing.Point(121, 159);
 			this.TimeNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -306,11 +318,47 @@
 			this.TimeNumericUpDown.Tag = "";
 			this.TimeNumericUpDown.ThousandsSeparator = true;
 			// 
+			// groupBox1
+			// 
+			this.groupBox1.Controls.Add(this.radioButton1);
+			this.groupBox1.Controls.Add(this.radioButton2);
+			this.groupBox1.Location = new System.Drawing.Point(553, 26);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(216, 142);
+			this.groupBox1.TabIndex = 56;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Пошук";
+			// 
+			// PerHourRadioButton
+			// 
+			this.PerHourRadioButton.AutoSize = true;
+			this.PerHourRadioButton.Checked = true;
+			this.PerHourRadioButton.Location = new System.Drawing.Point(121, 200);
+			this.PerHourRadioButton.Name = "PerHourRadioButton";
+			this.PerHourRadioButton.Size = new System.Drawing.Size(73, 17);
+			this.PerHourRadioButton.TabIndex = 57;
+			this.PerHourRadioButton.TabStop = true;
+			this.PerHourRadioButton.Text = "Викладач";
+			this.PerHourRadioButton.UseVisualStyleBackColor = true;
+			// 
+			// FixedRadioButton
+			// 
+			this.FixedRadioButton.AutoSize = true;
+			this.FixedRadioButton.Location = new System.Drawing.Point(121, 224);
+			this.FixedRadioButton.Name = "FixedRadioButton";
+			this.FixedRadioButton.Size = new System.Drawing.Size(87, 17);
+			this.FixedRadioButton.TabIndex = 58;
+			this.FixedRadioButton.Text = "Службовець";
+			this.FixedRadioButton.UseVisualStyleBackColor = true;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.PerHourRadioButton);
+			this.Controls.Add(this.FixedRadioButton);
+			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.TimeNumericUpDown);
 			this.Controls.Add(this.SalaryNumericUpDown);
 			this.Controls.Add(this.richTextBox1);
@@ -326,21 +374,22 @@
 			this.Controls.Add(this.PrevButton);
 			this.Controls.Add(this.FirstButton);
 			this.Controls.Add(this.PostComboBox);
-			this.Controls.Add(this.radioButton2);
-			this.Controls.Add(this.radioButton1);
 			this.Controls.Add(this.PatronymicTextBox);
 			this.Controls.Add(this.NameTextBox);
 			this.Controls.Add(this.SurnameTextBox);
 			this.Controls.Add(this.label6);
-			this.Controls.Add(this.label5);
+			this.Controls.Add(this.SalaryLabel);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.Name = "Form1";
 			this.Text = "Form1";
+			this.Load += new System.EventHandler(this.Form1_Load);
 			((System.ComponentModel.ISupportInitialize)(this.SalaryNumericUpDown)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.TimeNumericUpDown)).EndInit();
+			this.groupBox1.ResumeLayout(false);
+			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -367,13 +416,16 @@
 		private System.Windows.Forms.TextBox NameTextBox;
 		private System.Windows.Forms.TextBox SurnameTextBox;
 		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label SalaryLabel;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.NumericUpDown SalaryNumericUpDown;
 		private System.Windows.Forms.NumericUpDown TimeNumericUpDown;
+		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.RadioButton PerHourRadioButton;
+		private System.Windows.Forms.RadioButton FixedRadioButton;
 	}
 }
 
