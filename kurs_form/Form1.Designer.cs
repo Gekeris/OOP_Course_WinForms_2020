@@ -81,7 +81,7 @@
 			// 
 			// textBox4
 			// 
-			this.textBox4.Location = new System.Drawing.Point(355, 158);
+			this.textBox4.Location = new System.Drawing.Point(344, 159);
 			this.textBox4.Name = "textBox4";
 			this.textBox4.Size = new System.Drawing.Size(100, 20);
 			this.textBox4.TabIndex = 51;
@@ -123,6 +123,7 @@
 			this.DeleteButton.TabIndex = 47;
 			this.DeleteButton.Text = "Delete";
 			this.DeleteButton.UseVisualStyleBackColor = true;
+			this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
 			// 
 			// NextButton
 			// 
@@ -142,6 +143,7 @@
 			this.UpdateButton.TabIndex = 45;
 			this.UpdateButton.Text = "Update";
 			this.UpdateButton.UseVisualStyleBackColor = true;
+			this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
 			// 
 			// InsertButton
 			// 

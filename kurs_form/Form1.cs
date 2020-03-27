@@ -13,9 +13,9 @@ namespace kurs_form
 {
 	public partial class Form1 : Form
 	{
-		static LinkedList<Worker> workers = new LinkedList<Worker>();
-		Worker Current_worker;
-		int index;
+		private static LinkedList<Worker> workers = new LinkedList<Worker>();
+		private static Worker Current_worker;
+		private static int index;
 		public Form1()
 		{
 			InitializeComponent();
@@ -34,9 +34,20 @@ namespace kurs_form
 			string post_insert = PostComboBox.Text;
 			int salary_insert = Convert.ToInt32(SalaryNumericUpDown.Value);
 			int time_insert = Convert.ToInt32(SalaryNumericUpDown.Value);
-			
-			workers.AddLast(new Fixed(surname_insert, name_insert, patronymic_insert, post_insert, salary_insert, time_insert));
+
+			if (PerHourRadioButton.Checked)
+				workers.AddLast(new PerHour(surname_insert, name_insert, patronymic_insert, post_insert, salary_insert, time_insert));
+			else
+				workers.AddLast(new Fixed(surname_insert, name_insert, patronymic_insert, post_insert, salary_insert, time_insert));
+
+			using (StreamWriter sw = new StreamWriter("Base.txt", true, Encoding.UTF8))
+			{
+				sw.WriteLine(workers.Last().ToFile());
+			}
+
 			Current_worker = workers.Last();
+			index = workers.Count();
+			Show_new_worker();
 		}
 
 		private void FirstButton_Click(object sender, EventArgs e)
@@ -81,6 +92,12 @@ namespace kurs_form
 				Current_worker = workers.ElementAt(++index);
 				Show_new_worker();
 			}
+			else
+			{
+				Current_worker = workers.Last();
+				Show_new_worker();
+				index = workers.Count() - 1;
+			}
 		}
 
 		private void PrevButton_Click(object sender, EventArgs e)
@@ -89,6 +106,12 @@ namespace kurs_form
 			{
 				Current_worker = workers.ElementAt(--index);
 				Show_new_worker();
+			}
+			else
+			{
+				Current_worker = workers.First();
+				Show_new_worker();
+				index = 0;
 			}
 		}
 
@@ -106,9 +129,63 @@ namespace kurs_form
 						workers.AddLast(new Fixed(Block));
 				}
 			}
-			FirstButton_Click(sender,e);
+			FirstButton_Click(sender, e);
 		}
 
+		private void DeleteButton_Click(object sender, EventArgs e)
+		{
+			Change_delete(sender, e, false);
+		}
 
+		private void UpdateButton_Click(object sender, EventArgs e)
+		{
+			Change_delete(sender, e, true);
+		}
+
+		private void Change_delete(object sender, EventArgs e, bool change)
+		{
+
+			string[] File;
+			using (StreamReader sr = new StreamReader("Base.txt", Encoding.UTF8)) // Полностью считываем файл и записываем содержимое в переменную
+			{
+				File = sr.ReadToEnd().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+			}
+			string modified = $"{SurnameTextBox.Text};{NameTextBox.Text};{PatronymicTextBox.Text};{PostComboBox.Text};{SalaryNumericUpDown.Value};{TimeNumericUpDown.Value};{PerHourRadioButton.Checked}";
+			using (StreamWriter sw = new StreamWriter("Base.txt", false, Encoding.UTF8)) // Перезаписываем файл с изменениями
+			{
+				for (int i = 0; i < File.Length; i++)
+				{
+					if ((Current_worker.ToFile() == File[i]) && change) // Если изменяем и это та строка, которая надо
+					{
+						File[i] = modified;
+						LinkedListNode<Worker> ph = workers.Find(Current_worker).Previous;
+						workers.Remove(Current_worker);
+						
+						if (PerHourRadioButton.Checked)
+							Current_worker = new PerHour(modified.Split(';'));
+						else
+							Current_worker = new Fixed(modified.Split(';'));
+
+						if (ph != null)
+							workers.AddAfter(ph, Current_worker);
+						else
+							workers.AddFirst(Current_worker);
+						Show_new_worker();
+					}
+					else if ((Current_worker.ToFile() == File[i]) && !change) // Если удаляем и это та строка, которая надо
+					{
+						workers.Remove(Current_worker);
+						//index--;
+						continue;
+					}
+					sw.WriteLine(File[i]);
+				}
+			}
+			if (!change)
+			{
+				NextButton_Click(sender, e);
+				Show_new_worker();
+			}
+		}
 	}
 }
