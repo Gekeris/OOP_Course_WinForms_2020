@@ -30,10 +30,8 @@
 		{
 			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
 			this.button10 = new System.Windows.Forms.Button();
-			this.textBox4 = new System.Windows.Forms.TextBox();
 			this.Close = new System.Windows.Forms.Button();
 			this.LastButton = new System.Windows.Forms.Button();
-			this.PayButton = new System.Windows.Forms.Button();
 			this.DeleteButton = new System.Windows.Forms.Button();
 			this.NextButton = new System.Windows.Forms.Button();
 			this.UpdateButton = new System.Windows.Forms.Button();
@@ -57,6 +55,8 @@
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.PerHourRadioButton = new System.Windows.Forms.RadioButton();
 			this.FixedRadioButton = new System.Windows.Forms.RadioButton();
+			this.PaymentLabel = new System.Windows.Forms.Label();
+			this.PaymentTextBox = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.SalaryNumericUpDown)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.TimeNumericUpDown)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -79,13 +79,6 @@
 			this.button10.Text = "Запит доцентів";
 			this.button10.UseVisualStyleBackColor = true;
 			// 
-			// textBox4
-			// 
-			this.textBox4.Location = new System.Drawing.Point(344, 159);
-			this.textBox4.Name = "textBox4";
-			this.textBox4.Size = new System.Drawing.Size(100, 20);
-			this.textBox4.TabIndex = 51;
-			// 
 			// Close
 			// 
 			this.Close.Location = new System.Drawing.Point(380, 338);
@@ -105,15 +98,6 @@
 			this.LastButton.Text = "Last";
 			this.LastButton.UseVisualStyleBackColor = true;
 			this.LastButton.Click += new System.EventHandler(this.LastButton_Click);
-			// 
-			// PayButton
-			// 
-			this.PayButton.Location = new System.Drawing.Point(263, 158);
-			this.PayButton.Name = "PayButton";
-			this.PayButton.Size = new System.Drawing.Size(75, 23);
-			this.PayButton.TabIndex = 48;
-			this.PayButton.Text = "Зарплата за місяць";
-			this.PayButton.UseVisualStyleBackColor = true;
 			// 
 			// DeleteButton
 			// 
@@ -353,11 +337,32 @@
 			this.FixedRadioButton.Text = "Службовець";
 			this.FixedRadioButton.UseVisualStyleBackColor = true;
 			// 
+			// PaymentLabel
+			// 
+			this.PaymentLabel.AutoSize = true;
+			this.PaymentLabel.Location = new System.Drawing.Point(227, 136);
+			this.PaymentLabel.Name = "PaymentLabel";
+			this.PaymentLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+			this.PaymentLabel.Size = new System.Drawing.Size(55, 13);
+			this.PaymentLabel.TabIndex = 59;
+			this.PaymentLabel.Text = "Зарплата";
+			this.PaymentLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// PaymentTextBox
+			// 
+			this.PaymentTextBox.Location = new System.Drawing.Point(288, 133);
+			this.PaymentTextBox.Name = "PaymentTextBox";
+			this.PaymentTextBox.ReadOnly = true;
+			this.PaymentTextBox.Size = new System.Drawing.Size(100, 20);
+			this.PaymentTextBox.TabIndex = 60;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.PaymentTextBox);
+			this.Controls.Add(this.PaymentLabel);
 			this.Controls.Add(this.PerHourRadioButton);
 			this.Controls.Add(this.FixedRadioButton);
 			this.Controls.Add(this.groupBox1);
@@ -365,10 +370,8 @@
 			this.Controls.Add(this.SalaryNumericUpDown);
 			this.Controls.Add(this.richTextBox1);
 			this.Controls.Add(this.button10);
-			this.Controls.Add(this.textBox4);
 			this.Controls.Add(this.Close);
 			this.Controls.Add(this.LastButton);
-			this.Controls.Add(this.PayButton);
 			this.Controls.Add(this.DeleteButton);
 			this.Controls.Add(this.NextButton);
 			this.Controls.Add(this.UpdateButton);
@@ -401,10 +404,8 @@
 
 		private System.Windows.Forms.RichTextBox richTextBox1;
 		private System.Windows.Forms.Button button10;
-		private System.Windows.Forms.TextBox textBox4;
 		private System.Windows.Forms.Button Close;
 		private System.Windows.Forms.Button LastButton;
-		private System.Windows.Forms.Button PayButton;
 		private System.Windows.Forms.Button DeleteButton;
 		private System.Windows.Forms.Button NextButton;
 		private System.Windows.Forms.Button UpdateButton;
@@ -428,6 +429,8 @@
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.RadioButton PerHourRadioButton;
 		private System.Windows.Forms.RadioButton FixedRadioButton;
+		private System.Windows.Forms.Label PaymentLabel;
+		private System.Windows.Forms.TextBox PaymentTextBox;
 	}
 }
 

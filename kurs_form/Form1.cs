@@ -60,7 +60,7 @@ namespace kurs_form
 		private void LastButton_Click(object sender, EventArgs e)
 		{
 			Current_worker = workers.Last();
-			index = workers.Count();
+			index = workers.Count() - 1;
 			Show_new_worker();
 		}
 
@@ -77,11 +77,17 @@ namespace kurs_form
 			{
 				SalaryLabel.Text = "Ціна 1 год.";
 				PerHourRadioButton.Checked = true;
+				PaymentLabel.Show();
+				PaymentTextBox.Text = Current_worker.Payment().ToString();
+				PaymentTextBox.Show();
+
 			}
 			else
 			{
 				SalaryLabel.Text = "Зарплата";
 				FixedRadioButton.Checked = true;
+				PaymentLabel.Hide();
+				PaymentTextBox.Hide();
 			}
 		}
 
@@ -175,7 +181,7 @@ namespace kurs_form
 					else if ((Current_worker.ToFile() == File[i]) && !change) // Если удаляем и это та строка, которая надо
 					{
 						workers.Remove(Current_worker);
-						//index--;
+						index--;
 						continue;
 					}
 					sw.WriteLine(File[i]);
