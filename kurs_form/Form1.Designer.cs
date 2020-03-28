@@ -39,27 +39,42 @@
 			this.PrevButton = new System.Windows.Forms.Button();
 			this.FirstButton = new System.Windows.Forms.Button();
 			this.PostComboBox = new System.Windows.Forms.ComboBox();
-			this.radioButton2 = new System.Windows.Forms.RadioButton();
-			this.radioButton1 = new System.Windows.Forms.RadioButton();
 			this.PatronymicTextBox = new System.Windows.Forms.TextBox();
 			this.NameTextBox = new System.Windows.Forms.TextBox();
 			this.SurnameTextBox = new System.Windows.Forms.TextBox();
-			this.label6 = new System.Windows.Forms.Label();
+			this.TimeLabel = new System.Windows.Forms.Label();
 			this.SalaryLabel = new System.Windows.Forms.Label();
-			this.label4 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label1 = new System.Windows.Forms.Label();
+			this.PostLabel = new System.Windows.Forms.Label();
+			this.PatronymicLabel = new System.Windows.Forms.Label();
+			this.NameLabel = new System.Windows.Forms.Label();
+			this.SurnameLabel = new System.Windows.Forms.Label();
 			this.SalaryNumericUpDown = new System.Windows.Forms.NumericUpDown();
 			this.TimeNumericUpDown = new System.Windows.Forms.NumericUpDown();
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.FilterGroupBox = new System.Windows.Forms.GroupBox();
+			this.FilterSalary_per_hourCheckBox = new System.Windows.Forms.CheckBox();
+			this.FilterTimeCheckBox = new System.Windows.Forms.CheckBox();
+			this.FilterSalaryCheckBox = new System.Windows.Forms.CheckBox();
+			this.FilterPostCheckBox = new System.Windows.Forms.CheckBox();
+			this.FilterTokenTimeComboBox = new System.Windows.Forms.ComboBox();
+			this.FilterTokenSalaryComboBox = new System.Windows.Forms.ComboBox();
+			this.FilterSalary_per_hourLabel = new System.Windows.Forms.Label();
+			this.FilterSalary_per_hourComboBox = new System.Windows.Forms.ComboBox();
+			this.FilterTimeNumericUpDown = new System.Windows.Forms.NumericUpDown();
+			this.FilterSalaryNumericUpDown = new System.Windows.Forms.NumericUpDown();
+			this.FilterPostComboBox = new System.Windows.Forms.ComboBox();
+			this.FilterTimeLabel = new System.Windows.Forms.Label();
+			this.FilterSalaryLabel = new System.Windows.Forms.Label();
+			this.FilterPostLabel = new System.Windows.Forms.Label();
 			this.PerHourRadioButton = new System.Windows.Forms.RadioButton();
 			this.FixedRadioButton = new System.Windows.Forms.RadioButton();
 			this.PaymentLabel = new System.Windows.Forms.Label();
 			this.PaymentTextBox = new System.Windows.Forms.TextBox();
+			this.FilterCheckBox = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.SalaryNumericUpDown)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.TimeNumericUpDown)).BeginInit();
-			this.groupBox1.SuspendLayout();
+			this.FilterGroupBox.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.FilterTimeNumericUpDown)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.FilterSalaryNumericUpDown)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// richTextBox1
@@ -161,6 +176,8 @@
 			// 
 			// PostComboBox
 			// 
+			this.PostComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.PostComboBox.ForeColor = System.Drawing.SystemColors.WindowText;
 			this.PostComboBox.FormattingEnabled = true;
 			this.PostComboBox.Items.AddRange(new object[] {
             "Викладач",
@@ -173,28 +190,6 @@
 			this.PostComboBox.Name = "PostComboBox";
 			this.PostComboBox.Size = new System.Drawing.Size(100, 21);
 			this.PostComboBox.TabIndex = 41;
-			// 
-			// radioButton2
-			// 
-			this.radioButton2.AutoSize = true;
-			this.radioButton2.Location = new System.Drawing.Point(6, 43);
-			this.radioButton2.Name = "radioButton2";
-			this.radioButton2.Size = new System.Drawing.Size(77, 17);
-			this.radioButton2.TabIndex = 40;
-			this.radioButton2.Text = "Службовці";
-			this.radioButton2.UseVisualStyleBackColor = true;
-			// 
-			// radioButton1
-			// 
-			this.radioButton1.AutoSize = true;
-			this.radioButton1.Checked = true;
-			this.radioButton1.Location = new System.Drawing.Point(6, 19);
-			this.radioButton1.Name = "radioButton1";
-			this.radioButton1.Size = new System.Drawing.Size(75, 17);
-			this.radioButton1.TabIndex = 39;
-			this.radioButton1.TabStop = true;
-			this.radioButton1.Text = "Викладачі";
-			this.radioButton1.UseVisualStyleBackColor = true;
 			// 
 			// PatronymicTextBox
 			// 
@@ -217,15 +212,15 @@
 			this.SurnameTextBox.Size = new System.Drawing.Size(100, 20);
 			this.SurnameTextBox.TabIndex = 34;
 			// 
-			// label6
+			// TimeLabel
 			// 
-			this.label6.Location = new System.Drawing.Point(30, 161);
-			this.label6.Name = "label6";
-			this.label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.label6.Size = new System.Drawing.Size(85, 13);
-			this.label6.TabIndex = 33;
-			this.label6.Text = "Кількість годин";
-			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.TimeLabel.Location = new System.Drawing.Point(30, 161);
+			this.TimeLabel.Name = "TimeLabel";
+			this.TimeLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+			this.TimeLabel.Size = new System.Drawing.Size(85, 13);
+			this.TimeLabel.TabIndex = 33;
+			this.TimeLabel.Text = "Кількість годин";
+			this.TimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// SalaryLabel
 			// 
@@ -237,45 +232,45 @@
 			this.SalaryLabel.Text = "Ціна 1 год.";
 			this.SalaryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label4
+			// PostLabel
 			// 
-			this.label4.Location = new System.Drawing.Point(70, 109);
-			this.label4.Name = "label4";
-			this.label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.label4.Size = new System.Drawing.Size(45, 13);
-			this.label4.TabIndex = 31;
-			this.label4.Text = "Посада";
-			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.PostLabel.Location = new System.Drawing.Point(70, 109);
+			this.PostLabel.Name = "PostLabel";
+			this.PostLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+			this.PostLabel.Size = new System.Drawing.Size(45, 13);
+			this.PostLabel.TabIndex = 31;
+			this.PostLabel.Text = "Посада";
+			this.PostLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label3
+			// PatronymicLabel
 			// 
-			this.label3.Location = new System.Drawing.Point(48, 84);
-			this.label3.Name = "label3";
-			this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.label3.Size = new System.Drawing.Size(67, 13);
-			this.label3.TabIndex = 30;
-			this.label3.Text = "По-батькові";
-			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.PatronymicLabel.Location = new System.Drawing.Point(48, 84);
+			this.PatronymicLabel.Name = "PatronymicLabel";
+			this.PatronymicLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+			this.PatronymicLabel.Size = new System.Drawing.Size(67, 13);
+			this.PatronymicLabel.TabIndex = 30;
+			this.PatronymicLabel.Text = "По-батькові";
+			this.PatronymicLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label2
+			// NameLabel
 			// 
-			this.label2.Location = new System.Drawing.Point(89, 55);
-			this.label2.Name = "label2";
-			this.label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.label2.Size = new System.Drawing.Size(26, 13);
-			this.label2.TabIndex = 29;
-			this.label2.Text = "Ім\'я";
-			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.NameLabel.Location = new System.Drawing.Point(89, 55);
+			this.NameLabel.Name = "NameLabel";
+			this.NameLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+			this.NameLabel.Size = new System.Drawing.Size(26, 13);
+			this.NameLabel.TabIndex = 29;
+			this.NameLabel.Text = "Ім\'я";
+			this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label1
+			// SurnameLabel
 			// 
-			this.label1.Location = new System.Drawing.Point(59, 29);
-			this.label1.Name = "label1";
-			this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.label1.Size = new System.Drawing.Size(56, 13);
-			this.label1.TabIndex = 28;
-			this.label1.Text = "Прізвище";
-			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.SurnameLabel.Location = new System.Drawing.Point(59, 29);
+			this.SurnameLabel.Name = "SurnameLabel";
+			this.SurnameLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+			this.SurnameLabel.Size = new System.Drawing.Size(56, 13);
+			this.SurnameLabel.TabIndex = 28;
+			this.SurnameLabel.Text = "Прізвище";
+			this.SurnameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// SalaryNumericUpDown
 			// 
@@ -304,16 +299,212 @@
 			this.TimeNumericUpDown.Tag = "";
 			this.TimeNumericUpDown.ThousandsSeparator = true;
 			// 
-			// groupBox1
+			// FilterGroupBox
 			// 
-			this.groupBox1.Controls.Add(this.radioButton1);
-			this.groupBox1.Controls.Add(this.radioButton2);
-			this.groupBox1.Location = new System.Drawing.Point(553, 26);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(216, 142);
-			this.groupBox1.TabIndex = 56;
-			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Пошук";
+			this.FilterGroupBox.Controls.Add(this.FilterSalary_per_hourCheckBox);
+			this.FilterGroupBox.Controls.Add(this.FilterTimeCheckBox);
+			this.FilterGroupBox.Controls.Add(this.FilterSalaryCheckBox);
+			this.FilterGroupBox.Controls.Add(this.FilterPostCheckBox);
+			this.FilterGroupBox.Controls.Add(this.FilterTokenTimeComboBox);
+			this.FilterGroupBox.Controls.Add(this.FilterTokenSalaryComboBox);
+			this.FilterGroupBox.Controls.Add(this.FilterSalary_per_hourLabel);
+			this.FilterGroupBox.Controls.Add(this.FilterSalary_per_hourComboBox);
+			this.FilterGroupBox.Controls.Add(this.FilterTimeNumericUpDown);
+			this.FilterGroupBox.Controls.Add(this.FilterSalaryNumericUpDown);
+			this.FilterGroupBox.Controls.Add(this.FilterPostComboBox);
+			this.FilterGroupBox.Controls.Add(this.FilterTimeLabel);
+			this.FilterGroupBox.Controls.Add(this.FilterSalaryLabel);
+			this.FilterGroupBox.Controls.Add(this.FilterPostLabel);
+			this.FilterGroupBox.Enabled = false;
+			this.FilterGroupBox.Location = new System.Drawing.Point(434, 34);
+			this.FilterGroupBox.Name = "FilterGroupBox";
+			this.FilterGroupBox.Size = new System.Drawing.Size(335, 131);
+			this.FilterGroupBox.TabIndex = 56;
+			this.FilterGroupBox.TabStop = false;
+			// 
+			// FilterSalary_per_hourCheckBox
+			// 
+			this.FilterSalary_per_hourCheckBox.AutoSize = true;
+			this.FilterSalary_per_hourCheckBox.Location = new System.Drawing.Point(246, 99);
+			this.FilterSalary_per_hourCheckBox.Name = "FilterSalary_per_hourCheckBox";
+			this.FilterSalary_per_hourCheckBox.Size = new System.Drawing.Size(59, 17);
+			this.FilterSalary_per_hourCheckBox.TabIndex = 69;
+			this.FilterSalary_per_hourCheckBox.Text = "Увімк.";
+			this.FilterSalary_per_hourCheckBox.UseVisualStyleBackColor = true;
+			this.FilterSalary_per_hourCheckBox.CheckedChanged += new System.EventHandler(this.FilterSalary_per_hourCheckBox_CheckedChanged);
+			// 
+			// FilterTimeCheckBox
+			// 
+			this.FilterTimeCheckBox.AutoSize = true;
+			this.FilterTimeCheckBox.Location = new System.Drawing.Point(246, 73);
+			this.FilterTimeCheckBox.Name = "FilterTimeCheckBox";
+			this.FilterTimeCheckBox.Size = new System.Drawing.Size(59, 17);
+			this.FilterTimeCheckBox.TabIndex = 68;
+			this.FilterTimeCheckBox.Text = "Увімк.";
+			this.FilterTimeCheckBox.UseVisualStyleBackColor = true;
+			this.FilterTimeCheckBox.CheckedChanged += new System.EventHandler(this.FilterTimeCheckBox_CheckedChanged);
+			// 
+			// FilterSalaryCheckBox
+			// 
+			this.FilterSalaryCheckBox.AutoSize = true;
+			this.FilterSalaryCheckBox.Location = new System.Drawing.Point(246, 47);
+			this.FilterSalaryCheckBox.Name = "FilterSalaryCheckBox";
+			this.FilterSalaryCheckBox.Size = new System.Drawing.Size(59, 17);
+			this.FilterSalaryCheckBox.TabIndex = 67;
+			this.FilterSalaryCheckBox.Text = "Увімк.";
+			this.FilterSalaryCheckBox.UseVisualStyleBackColor = true;
+			this.FilterSalaryCheckBox.CheckedChanged += new System.EventHandler(this.FilterSalaryCheckBox_CheckedChanged);
+			// 
+			// FilterPostCheckBox
+			// 
+			this.FilterPostCheckBox.AutoSize = true;
+			this.FilterPostCheckBox.Location = new System.Drawing.Point(246, 19);
+			this.FilterPostCheckBox.Name = "FilterPostCheckBox";
+			this.FilterPostCheckBox.Size = new System.Drawing.Size(59, 17);
+			this.FilterPostCheckBox.TabIndex = 66;
+			this.FilterPostCheckBox.Text = "Увімк.";
+			this.FilterPostCheckBox.UseVisualStyleBackColor = true;
+			this.FilterPostCheckBox.CheckedChanged += new System.EventHandler(this.FilterPostCheckBox_CheckedChanged);
+			// 
+			// FilterTokenTimeComboBox
+			// 
+			this.FilterTokenTimeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.FilterTokenTimeComboBox.Enabled = false;
+			this.FilterTokenTimeComboBox.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.FilterTokenTimeComboBox.FormattingEnabled = true;
+			this.FilterTokenTimeComboBox.Items.AddRange(new object[] {
+            ">",
+            ">=",
+            "<",
+            "<=",
+            "=",
+            "!="});
+			this.FilterTokenTimeComboBox.Location = new System.Drawing.Point(100, 72);
+			this.FilterTokenTimeComboBox.Name = "FilterTokenTimeComboBox";
+			this.FilterTokenTimeComboBox.Size = new System.Drawing.Size(34, 21);
+			this.FilterTokenTimeComboBox.TabIndex = 65;
+			// 
+			// FilterTokenSalaryComboBox
+			// 
+			this.FilterTokenSalaryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.FilterTokenSalaryComboBox.Enabled = false;
+			this.FilterTokenSalaryComboBox.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.FilterTokenSalaryComboBox.FormattingEnabled = true;
+			this.FilterTokenSalaryComboBox.Items.AddRange(new object[] {
+            ">",
+            ">=",
+            "<",
+            "<=",
+            "=",
+            "!="});
+			this.FilterTokenSalaryComboBox.Location = new System.Drawing.Point(100, 45);
+			this.FilterTokenSalaryComboBox.Name = "FilterTokenSalaryComboBox";
+			this.FilterTokenSalaryComboBox.Size = new System.Drawing.Size(34, 21);
+			this.FilterTokenSalaryComboBox.TabIndex = 64;
+			// 
+			// FilterSalary_per_hourLabel
+			// 
+			this.FilterSalary_per_hourLabel.AutoSize = true;
+			this.FilterSalary_per_hourLabel.Location = new System.Drawing.Point(25, 100);
+			this.FilterSalary_per_hourLabel.Name = "FilterSalary_per_hourLabel";
+			this.FilterSalary_per_hourLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+			this.FilterSalary_per_hourLabel.Size = new System.Drawing.Size(72, 13);
+			this.FilterSalary_per_hourLabel.TabIndex = 63;
+			this.FilterSalary_per_hourLabel.Text = "Тип професії";
+			this.FilterSalary_per_hourLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// FilterSalary_per_hourComboBox
+			// 
+			this.FilterSalary_per_hourComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.FilterSalary_per_hourComboBox.Enabled = false;
+			this.FilterSalary_per_hourComboBox.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.FilterSalary_per_hourComboBox.FormattingEnabled = true;
+			this.FilterSalary_per_hourComboBox.Items.AddRange(new object[] {
+            "Викладач",
+            "Службовець"});
+			this.FilterSalary_per_hourComboBox.Location = new System.Drawing.Point(100, 97);
+			this.FilterSalary_per_hourComboBox.Name = "FilterSalary_per_hourComboBox";
+			this.FilterSalary_per_hourComboBox.Size = new System.Drawing.Size(140, 21);
+			this.FilterSalary_per_hourComboBox.TabIndex = 62;
+			// 
+			// FilterTimeNumericUpDown
+			// 
+			this.FilterTimeNumericUpDown.Enabled = false;
+			this.FilterTimeNumericUpDown.Location = new System.Drawing.Point(140, 72);
+			this.FilterTimeNumericUpDown.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+			this.FilterTimeNumericUpDown.Name = "FilterTimeNumericUpDown";
+			this.FilterTimeNumericUpDown.Size = new System.Drawing.Size(100, 20);
+			this.FilterTimeNumericUpDown.TabIndex = 61;
+			this.FilterTimeNumericUpDown.Tag = "";
+			this.FilterTimeNumericUpDown.ThousandsSeparator = true;
+			// 
+			// FilterSalaryNumericUpDown
+			// 
+			this.FilterSalaryNumericUpDown.Enabled = false;
+			this.FilterSalaryNumericUpDown.Location = new System.Drawing.Point(140, 46);
+			this.FilterSalaryNumericUpDown.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+			this.FilterSalaryNumericUpDown.Name = "FilterSalaryNumericUpDown";
+			this.FilterSalaryNumericUpDown.Size = new System.Drawing.Size(100, 20);
+			this.FilterSalaryNumericUpDown.TabIndex = 60;
+			this.FilterSalaryNumericUpDown.ThousandsSeparator = true;
+			// 
+			// FilterPostComboBox
+			// 
+			this.FilterPostComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.FilterPostComboBox.Enabled = false;
+			this.FilterPostComboBox.ForeColor = System.Drawing.SystemColors.WindowText;
+			this.FilterPostComboBox.FormattingEnabled = true;
+			this.FilterPostComboBox.Items.AddRange(new object[] {
+            "Викладач",
+            "Доцент",
+            "Професор",
+            "Методист",
+            "Електрик",
+            "Ректор"});
+			this.FilterPostComboBox.Location = new System.Drawing.Point(100, 18);
+			this.FilterPostComboBox.Name = "FilterPostComboBox";
+			this.FilterPostComboBox.Size = new System.Drawing.Size(140, 21);
+			this.FilterPostComboBox.TabIndex = 59;
+			// 
+			// FilterTimeLabel
+			// 
+			this.FilterTimeLabel.AutoSize = true;
+			this.FilterTimeLabel.Location = new System.Drawing.Point(12, 75);
+			this.FilterTimeLabel.Name = "FilterTimeLabel";
+			this.FilterTimeLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+			this.FilterTimeLabel.Size = new System.Drawing.Size(85, 13);
+			this.FilterTimeLabel.TabIndex = 58;
+			this.FilterTimeLabel.Text = "Кількість годин";
+			this.FilterTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// FilterSalaryLabel
+			// 
+			this.FilterSalaryLabel.Location = new System.Drawing.Point(27, 48);
+			this.FilterSalaryLabel.Name = "FilterSalaryLabel";
+			this.FilterSalaryLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+			this.FilterSalaryLabel.Size = new System.Drawing.Size(67, 13);
+			this.FilterSalaryLabel.TabIndex = 57;
+			this.FilterSalaryLabel.Text = "Ціна 1 год.";
+			this.FilterSalaryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// FilterPostLabel
+			// 
+			this.FilterPostLabel.AutoSize = true;
+			this.FilterPostLabel.Location = new System.Drawing.Point(52, 21);
+			this.FilterPostLabel.Name = "FilterPostLabel";
+			this.FilterPostLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+			this.FilterPostLabel.Size = new System.Drawing.Size(45, 13);
+			this.FilterPostLabel.TabIndex = 56;
+			this.FilterPostLabel.Text = "Посада";
+			this.FilterPostLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// PerHourRadioButton
 			// 
@@ -356,16 +547,28 @@
 			this.PaymentTextBox.Size = new System.Drawing.Size(100, 20);
 			this.PaymentTextBox.TabIndex = 60;
 			// 
+			// FilterCheckBox
+			// 
+			this.FilterCheckBox.AutoSize = true;
+			this.FilterCheckBox.Location = new System.Drawing.Point(434, 12);
+			this.FilterCheckBox.Name = "FilterCheckBox";
+			this.FilterCheckBox.Size = new System.Drawing.Size(62, 17);
+			this.FilterCheckBox.TabIndex = 61;
+			this.FilterCheckBox.Text = "Фільтр";
+			this.FilterCheckBox.UseVisualStyleBackColor = true;
+			this.FilterCheckBox.CheckedChanged += new System.EventHandler(this.FilterCheckBox_CheckedChanged);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.FilterCheckBox);
 			this.Controls.Add(this.PaymentTextBox);
 			this.Controls.Add(this.PaymentLabel);
 			this.Controls.Add(this.PerHourRadioButton);
 			this.Controls.Add(this.FixedRadioButton);
-			this.Controls.Add(this.groupBox1);
+			this.Controls.Add(this.FilterGroupBox);
 			this.Controls.Add(this.TimeNumericUpDown);
 			this.Controls.Add(this.SalaryNumericUpDown);
 			this.Controls.Add(this.richTextBox1);
@@ -382,19 +585,21 @@
 			this.Controls.Add(this.PatronymicTextBox);
 			this.Controls.Add(this.NameTextBox);
 			this.Controls.Add(this.SurnameTextBox);
-			this.Controls.Add(this.label6);
+			this.Controls.Add(this.TimeLabel);
 			this.Controls.Add(this.SalaryLabel);
-			this.Controls.Add(this.label4);
-			this.Controls.Add(this.label3);
-			this.Controls.Add(this.label2);
-			this.Controls.Add(this.label1);
+			this.Controls.Add(this.PostLabel);
+			this.Controls.Add(this.PatronymicLabel);
+			this.Controls.Add(this.NameLabel);
+			this.Controls.Add(this.SurnameLabel);
 			this.Name = "Form1";
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			((System.ComponentModel.ISupportInitialize)(this.SalaryNumericUpDown)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.TimeNumericUpDown)).EndInit();
-			this.groupBox1.ResumeLayout(false);
-			this.groupBox1.PerformLayout();
+			this.FilterGroupBox.ResumeLayout(false);
+			this.FilterGroupBox.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.FilterTimeNumericUpDown)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.FilterSalaryNumericUpDown)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -413,24 +618,37 @@
 		private System.Windows.Forms.Button PrevButton;
 		private System.Windows.Forms.Button FirstButton;
 		private System.Windows.Forms.ComboBox PostComboBox;
-		private System.Windows.Forms.RadioButton radioButton2;
-		private System.Windows.Forms.RadioButton radioButton1;
 		private System.Windows.Forms.TextBox PatronymicTextBox;
 		private System.Windows.Forms.TextBox NameTextBox;
 		private System.Windows.Forms.TextBox SurnameTextBox;
-		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label TimeLabel;
 		private System.Windows.Forms.Label SalaryLabel;
-		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label PostLabel;
+		private System.Windows.Forms.Label PatronymicLabel;
+		private System.Windows.Forms.Label NameLabel;
+		private System.Windows.Forms.Label SurnameLabel;
 		private System.Windows.Forms.NumericUpDown SalaryNumericUpDown;
 		private System.Windows.Forms.NumericUpDown TimeNumericUpDown;
-		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.GroupBox FilterGroupBox;
 		private System.Windows.Forms.RadioButton PerHourRadioButton;
 		private System.Windows.Forms.RadioButton FixedRadioButton;
 		private System.Windows.Forms.Label PaymentLabel;
 		private System.Windows.Forms.TextBox PaymentTextBox;
+		private System.Windows.Forms.CheckBox FilterCheckBox;
+		private System.Windows.Forms.Label FilterSalary_per_hourLabel;
+		private System.Windows.Forms.ComboBox FilterSalary_per_hourComboBox;
+		private System.Windows.Forms.NumericUpDown FilterTimeNumericUpDown;
+		private System.Windows.Forms.NumericUpDown FilterSalaryNumericUpDown;
+		private System.Windows.Forms.ComboBox FilterPostComboBox;
+		private System.Windows.Forms.Label FilterTimeLabel;
+		private System.Windows.Forms.Label FilterSalaryLabel;
+		private System.Windows.Forms.Label FilterPostLabel;
+		private System.Windows.Forms.ComboBox FilterTokenSalaryComboBox;
+		private System.Windows.Forms.ComboBox FilterTokenTimeComboBox;
+		private System.Windows.Forms.CheckBox FilterSalary_per_hourCheckBox;
+		private System.Windows.Forms.CheckBox FilterTimeCheckBox;
+		private System.Windows.Forms.CheckBox FilterSalaryCheckBox;
+		private System.Windows.Forms.CheckBox FilterPostCheckBox;
 	}
 }
 

@@ -193,5 +193,58 @@ namespace kurs_form
 				Show_new_worker();
 			}
 		}
+
+		private void FilterCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (FilterCheckBox.Checked)
+				FilterGroupBox.Enabled = true;
+			else
+				FilterGroupBox.Enabled = false;
+			
+		}
+
+		private void FilterPostCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (FilterPostCheckBox.Checked)
+				FilterPostComboBox.Enabled = true;
+			else
+				FilterPostComboBox.Enabled = false;
+		}
+
+		private void FilterSalaryCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (FilterSalaryCheckBox.Checked)
+			{
+				FilterTokenSalaryComboBox.Enabled = true;
+				FilterSalaryNumericUpDown.Enabled = true;
+			}
+			else
+			{
+				FilterTokenSalaryComboBox.Enabled = false;
+				FilterSalaryNumericUpDown.Enabled = false;
+			}
+		}
+
+		private void FilterTimeCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (FilterTimeCheckBox.Checked)
+			{
+				FilterTokenTimeComboBox.Enabled = true;
+				FilterTimeNumericUpDown.Enabled = true;
+			}
+			else
+			{
+				FilterTokenTimeComboBox.Enabled = false;
+				FilterTimeNumericUpDown.Enabled = false;
+			}
+		}
+
+		private void FilterSalary_per_hourCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (FilterSalary_per_hourCheckBox.Checked)
+				FilterSalary_per_hourComboBox.Enabled = true;
+			else
+				FilterSalary_per_hourComboBox.Enabled = false;
+		}
 	}
 }
