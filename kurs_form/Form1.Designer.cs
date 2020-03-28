@@ -487,12 +487,13 @@
 			// 
 			// FilterSalaryLabel
 			// 
-			this.FilterSalaryLabel.Location = new System.Drawing.Point(27, 48);
+			this.FilterSalaryLabel.AutoSize = true;
+			this.FilterSalaryLabel.Location = new System.Drawing.Point(39, 48);
 			this.FilterSalaryLabel.Name = "FilterSalaryLabel";
 			this.FilterSalaryLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.FilterSalaryLabel.Size = new System.Drawing.Size(67, 13);
+			this.FilterSalaryLabel.Size = new System.Drawing.Size(55, 13);
 			this.FilterSalaryLabel.TabIndex = 57;
-			this.FilterSalaryLabel.Text = "Ціна 1 год.";
+			this.FilterSalaryLabel.Text = "Зарплата";
 			this.FilterSalaryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// FilterPostLabel

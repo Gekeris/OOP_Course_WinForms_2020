@@ -201,6 +201,7 @@ namespace kurs_form
 			else
 				FilterGroupBox.Enabled = false;
 			
+			
 		}
 
 		private void FilterPostCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -245,6 +246,95 @@ namespace kurs_form
 				FilterSalary_per_hourComboBox.Enabled = true;
 			else
 				FilterSalary_per_hourComboBox.Enabled = false;
+		}
+
+		private bool FilterCheck(Worker w)
+		{
+			if (FilterCheckBox.Checked && FilterPostCheckBox.Checked && (w.Post.ToString() != FilterPostComboBox.SelectedItem.ToString()))
+				return false;
+			if (FilterCheckBox.Checked && FilterSalaryCheckBox.Checked)
+			{
+				switch (FilterTokenSalaryComboBox.SelectedIndex)
+				{
+					case 0:
+					if (!(w.Payment() > FilterSalaryNumericUpDown.Value))
+						return false;
+					break;
+					case 1:
+					if (!(w.Payment() >= FilterSalaryNumericUpDown.Value))
+						return false;
+					break;
+					case 2:
+					if (!(w.Payment() < FilterSalaryNumericUpDown.Value))
+						return false;
+					break;
+					case 3:
+					if (!(w.Payment() <= FilterSalaryNumericUpDown.Value))
+						return false;
+					break;
+					case 4:
+					if (!(w.Payment() == FilterSalaryNumericUpDown.Value))
+						return false;
+					break;
+					case 5:
+					if (!(w.Payment() != FilterSalaryNumericUpDown.Value))
+						return false;
+					break;
+					default:
+					return false;
+				}
+			}
+
+			if (FilterCheckBox.Checked && FilterTimeCheckBox.Checked)
+			{
+				switch (FilterTokenTimeComboBox.SelectedIndex)
+				{
+					case 0:
+					if (!(w.Time > FilterTimeNumericUpDown.Value))
+						return false;
+					break;
+					case 1:
+					if (!(w.Time >= FilterTimeNumericUpDown.Value))
+						return false;
+					break;
+					case 2:
+					if (!(w.Time < FilterTimeNumericUpDown.Value))
+						return false;
+					break;
+					case 3:
+					if (!(w.Time <= FilterTimeNumericUpDown.Value))
+						return false;
+					break;
+					case 4:
+					if (!(w.Time == FilterTimeNumericUpDown.Value))
+						return false;
+					break;
+					case 5:
+					if (!(w.Time != FilterTimeNumericUpDown.Value))
+						return false;
+					break;
+					default:
+					return false;
+				}
+			}
+
+			if (FilterCheckBox.Checked && FilterSalary_per_hourCheckBox.Checked)
+			{
+				switch (FilterSalary_per_hourComboBox.SelectedIndex)
+				{
+					case 0:
+					if (!w.Salary_per_hour)
+						return false;
+					break;
+					case 1:
+					if (w.Salary_per_hour)
+						return false;
+					break;
+					default:
+					return false;
+				}
+			}
+			return true;
 		}
 	}
 }
