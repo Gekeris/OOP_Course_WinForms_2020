@@ -52,15 +52,29 @@ namespace kurs_form
 
 		private void FirstButton_Click(object sender, EventArgs e)
 		{
-			Current_worker = workers.First();
-			index = 0;
+			for (int i = 0; i < workers.Count(); i++)
+			{
+				if (FilterCheck(workers.ElementAt(i)))
+				{
+					Current_worker = workers.ElementAt(i);
+					index = i;
+					break;
+				}
+			}
 			Show_new_worker();
 		}
 
 		private void LastButton_Click(object sender, EventArgs e)
 		{
-			Current_worker = workers.Last();
-			index = workers.Count() - 1;
+			for (int i = workers.Count - 1; i >= 0; i--)
+			{
+				if (FilterCheck(workers.ElementAt(i)))
+				{
+					Current_worker = workers.ElementAt(i);
+					index = i;
+					break;
+				}
+			}
 			Show_new_worker();
 		}
 
@@ -93,32 +107,30 @@ namespace kurs_form
 
 		private void NextButton_Click(object sender, EventArgs e)
 		{
-			if (index < workers.Count() - 1)
+			for (int i = index + 1; i < workers.Count(); i++)
 			{
-				Current_worker = workers.ElementAt(++index);
-				Show_new_worker();
+				if (FilterCheck(workers.ElementAt(i)))
+				{
+					Current_worker = workers.ElementAt(i);
+					index = i;
+					break;
+				}
 			}
-			else
-			{
-				Current_worker = workers.Last();
-				Show_new_worker();
-				index = workers.Count() - 1;
-			}
+			Show_new_worker();
 		}
 
 		private void PrevButton_Click(object sender, EventArgs e)
 		{
-			if (index > 0)
+			for(int i = index - 1; i >= 0; i--)
 			{
-				Current_worker = workers.ElementAt(--index);
-				Show_new_worker();
+				if (FilterCheck(workers.ElementAt(i)))
+				{
+					Current_worker = workers.ElementAt(i);
+					index = i;
+					break;
+				}
 			}
-			else
-			{
-				Current_worker = workers.First();
-				Show_new_worker();
-				index = 0;
-			}
+			Show_new_worker();
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
