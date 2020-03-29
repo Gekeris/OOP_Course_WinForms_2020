@@ -35,19 +35,30 @@ namespace kurs_form
 			int salary_insert = Convert.ToInt32(SalaryNumericUpDown.Value);
 			int time_insert = Convert.ToInt32(SalaryNumericUpDown.Value);
 
-			if (PerHourRadioButton.Checked) // В зависимости от выбора дабавляем элемент в лист
-				workers.AddLast(new PerHour(surname_insert, name_insert, patronymic_insert, post_insert, salary_insert, time_insert));
-			else
-				workers.AddLast(new Fixed(surname_insert, name_insert, patronymic_insert, post_insert, salary_insert, time_insert));
-
-			using (StreamWriter sw = new StreamWriter("Base.txt", true, Encoding.UTF8)) // Записываем в базу
+			bool repeat = true;
+			foreach (string s in WorkersListBox.Items)
 			{
-				sw.WriteLine(workers.Last().ToFile());
+				if (s == $"{surname_insert} {name_insert} {patronymic_insert}")
+				{
+					repeat = false;
+				}
 			}
+			if (repeat)
+			{
+				if (PerHourRadioButton.Checked) // В зависимости от выбора дабавляем элемент в лист
+					workers.AddLast(new PerHour(surname_insert, name_insert, patronymic_insert, post_insert, salary_insert, time_insert));
+				else
+					workers.AddLast(new Fixed(surname_insert, name_insert, patronymic_insert, post_insert, salary_insert, time_insert));
 
-			Current_worker = workers.Last(); // Устанавливаем добавленого рабочего как текущего и отображаем его
-			index = workers.Count() - 1;
-			Show_new_worker();
+				using (StreamWriter sw = new StreamWriter("Base.txt", true, Encoding.UTF8)) // Записываем в базу
+				{
+					sw.WriteLine(workers.Last().ToFile());
+				}
+
+				Current_worker = workers.Last(); // Устанавливаем добавленого рабочего как текущего и отображаем его
+				index = workers.Count() - 1;
+				ShowCurentWorker();
+			}
 		}
 
 		private void FirstButton_Click(object sender, EventArgs e) // Ищем первого рабочего который подходит
@@ -61,7 +72,7 @@ namespace kurs_form
 					break;
 				}
 			}
-			Show_new_worker(); // Отображаем текущего рабочего
+			ShowCurentWorker(); // Отображаем текущего рабочего
 		}
 
 		private void LastButton_Click(object sender, EventArgs e) // Ищем последнего рабочего который подходит
@@ -75,10 +86,10 @@ namespace kurs_form
 					break;
 				}
 			}
-			Show_new_worker(); // Отображаем текущего рабочего
+			ShowCurentWorker(); // Отображаем текущего рабочего
 		}
 
-		private void Show_new_worker() // Отображаем текущего рабочего
+		private void ShowCurentWorker() // Отображаем текущего рабочего
 		{
 			SurnameTextBox.Text = Current_worker.Surname; // Считываем данные с текущего рабочего и выводим их 
 			NameTextBox.Text = Current_worker.Name;
@@ -104,11 +115,11 @@ namespace kurs_form
 			}
 
 			int i = 0;
-			foreach (string s in ListBox.Items) // Проверяем все элементы в листбоксе, пока не найдём текущий элемент
+			foreach (string s in WorkersListBox.Items) // Проверяем все элементы в листбоксе, пока не найдём текущий элемент
 			{
 				if (Current_worker.ToListBox() == s)
 				{
-					ListBox.SelectedIndex = i; // Когда нашли, выделяем его
+					WorkersListBox.SelectedIndex = i; // Когда нашли, выделяем его
 					break;
 				}
 				i++;
@@ -126,7 +137,7 @@ namespace kurs_form
 					break;
 				}
 			}
-			Show_new_worker();
+			ShowCurentWorker();
 		}
 
 		private void PrevButton_Click(object sender, EventArgs e) // Предыдущий подходящий работник
@@ -140,7 +151,7 @@ namespace kurs_form
 					break;
 				}
 			}
-			Show_new_worker();
+			ShowCurentWorker();
 		}
 
 		private void Form1_Load(object sender, EventArgs e) // Выполняеться при запуске программы
@@ -165,18 +176,12 @@ namespace kurs_form
 			FilterPostComboBox.SelectedIndex = 0;
 		}
 
-		private void DeleteButton_Click(object sender, EventArgs e) // Удаление рабочего
+		private void Change_delete(object sender, EventArgs e)
 		{
-			Change_delete(sender, e, false);
-		}
+			bool change = true;
+			if (sender.ToString() == "System.Windows.Forms.Button, Text: Видалити")
+				change = false;
 
-		private void UpdateButton_Click(object sender, EventArgs e) // Изменение рабочего
-		{
-			Change_delete(sender, e, true);
-		}
-
-		private void Change_delete(object sender, EventArgs e, bool change)
-		{
 			string[] File;
 			using (StreamReader sr = new StreamReader("Base.txt", Encoding.UTF8)) // Полностью считываем файл и записываем содержимое в переменную
 			{
@@ -202,7 +207,7 @@ namespace kurs_form
 							workers.AddAfter(ph, Current_worker);
 						else
 							workers.AddFirst(Current_worker);
-						Show_new_worker();
+						ShowCurentWorker();
 					}
 					else if ((Current_worker.ToFile() == File[i]) && !change) // Если удаляем и это та строка, которая надо
 					{
@@ -215,7 +220,7 @@ namespace kurs_form
 			}
 			if (!change)
 				NextButton_Click(sender, e);
-			ListBoxCheck();
+			ListBoxCheck(sender,e);
 		}
 
 		private void FilterCheckBox_CheckedChanged(object sender, EventArgs e) // Активация фильтра
@@ -224,6 +229,7 @@ namespace kurs_form
 				FilterGroupBox.Enabled = true;
 			else
 				FilterGroupBox.Enabled = false;
+			ListBoxCheck(sender, e);
 		}
 
 		private void FilterPostCheckBox_CheckedChanged(object sender, EventArgs e) // Активация фильра по профессии
@@ -232,7 +238,7 @@ namespace kurs_form
 				FilterPostComboBox.Enabled = true;
 			else
 				FilterPostComboBox.Enabled = false;
-			ListBoxCheck();
+			ListBoxCheck(sender,e);
 		}
 
 		private void FilterSalaryCheckBox_CheckedChanged(object sender, EventArgs e) // Активация фильра по зарплате
@@ -247,7 +253,7 @@ namespace kurs_form
 				FilterTokenSalaryComboBox.Enabled = false;
 				FilterSalaryNumericUpDown.Enabled = false;
 			}
-			ListBoxCheck();
+			ListBoxCheck(sender,e);
 		}
 
 		private void FilterTimeCheckBox_CheckedChanged(object sender, EventArgs e)  // Активация фильра по времени работы
@@ -262,7 +268,7 @@ namespace kurs_form
 				FilterTokenTimeComboBox.Enabled = false;
 				FilterTimeNumericUpDown.Enabled = false;
 			}
-			ListBoxCheck();
+			ListBoxCheck(sender,e);
 		}
 
 		private void FilterSalary_per_hourCheckBox_CheckedChanged(object sender, EventArgs e)  // Активация фильра по типу зарплаты
@@ -271,76 +277,21 @@ namespace kurs_form
 				FilterSalary_per_hourComboBox.Enabled = true;
 			else
 				FilterSalary_per_hourComboBox.Enabled = false;
-			ListBoxCheck();
+			ListBoxCheck(sender,e);
 		}
 
-		private bool FilterCheck(Worker w) // Проверка, проходил ли элемент фильтр
+		private bool FilterCheck(Worker w) // Проверка, проходит ли элемент фильтр
 		{
 			if (FilterCheckBox.Checked) // Включен ли фильтр
 			{
 				if (FilterPostCheckBox.Checked && (w.Post.ToString() != FilterPostComboBox.SelectedItem.ToString())) // Если фильтр по профессии включен и элемент не проходит проверку по профессии
 					return false;
-				if (FilterSalaryCheckBox.Checked) // Если фильтр по зарплате включён
-				{
-					switch (FilterTokenSalaryComboBox.SelectedIndex) // Узнаём выбранный оператор и производим сравнение
-					{
-						case 0:
-						if (!(w.Payment() > FilterSalaryNumericUpDown.Value))
-							return false;
-						break;
-						case 1:
-						if (!(w.Payment() >= FilterSalaryNumericUpDown.Value))
-							return false;
-						break;
-						case 2:
-						if (!(w.Payment() < FilterSalaryNumericUpDown.Value))
-							return false;
-						break;
-						case 3:
-						if (!(w.Payment() <= FilterSalaryNumericUpDown.Value))
-							return false;
-						break;
-						case 4:
-						if (!(w.Payment() == FilterSalaryNumericUpDown.Value))
-							return false;
-						break;
-						case 5:
-						if (!(w.Payment() != FilterSalaryNumericUpDown.Value))
-							return false;
-						break;
-					}
-				}
 
-				if (FilterTimeCheckBox.Checked) // Если фильтр по времени
-				{
-					switch (FilterTokenTimeComboBox.SelectedIndex) // Узнаём выбранный оператор и производим сравнение
-					{
-						case 0:
-						if (!(w.Time > FilterTimeNumericUpDown.Value))
-							return false;
-						break;
-						case 1:
-						if (!(w.Time >= FilterTimeNumericUpDown.Value))
-							return false;
-						break;
-						case 2:
-						if (!(w.Time < FilterTimeNumericUpDown.Value))
-							return false;
-						break;
-						case 3:
-						if (!(w.Time <= FilterTimeNumericUpDown.Value))
-							return false;
-						break;
-						case 4:
-						if (!(w.Time == FilterTimeNumericUpDown.Value))
-							return false;
-						break;
-						case 5:
-						if (!(w.Time != FilterTimeNumericUpDown.Value))
-							return false;
-						break;
-					}
-				}
+				if (FilterSalaryCheckBox.Checked && !Comparison(Convert.ToInt32(FilterSalaryNumericUpDown.Value), FilterTokenSalaryComboBox.SelectedIndex, w.Payment())) // Если фильтр по зарплате включён и элемент не проходит фильтр
+					return false;
+
+				if (FilterTimeCheckBox.Checked && !Comparison(Convert.ToInt32(FilterTimeNumericUpDown.Value), FilterTokenTimeComboBox.SelectedIndex, w.Time)) // Если фильтр по времени и элемент не проходит фильтр
+					return false;
 
 				if (FilterSalary_per_hourCheckBox.Checked) // Если фильтр по типу зарплаты включён
 				{
@@ -364,54 +315,35 @@ namespace kurs_form
 		{
 			foreach (Worker w in workers)
 			{
-				if (w.ToListBox() == ListBox.SelectedItem.ToString())
+				if (w.ToListBox() == WorkersListBox.SelectedItem.ToString())
 				{
 					Current_worker = w;
 					break;
 				}
 			}
-			Show_new_worker();
+			ShowCurentWorker();
 		}
 
-		private void ListBoxCheck() // Отображение содержимого листбокса 
+		private void ListBoxCheck(object sender, EventArgs e) // Отображение содержимого листбокса. Вызывается при изменении настроек фильтра.
 		{
-			ListBox.Items.Clear();
+			WorkersListBox.Items.Clear();
 			foreach (Worker w in workers)
 			{
 				if (FilterCheck(w))
-					ListBox.Items.Add(w.ToListBox());
+					WorkersListBox.Items.Add(w.ToListBox());
 			}
-			Show_new_worker();
+			ShowCurentWorker();
 		}
 
-		private void FilterPostComboBox_SelectedIndexChanged(object sender, EventArgs e) // Изменение содежимого листбокса при изменении
+		private void KeyPress_TextBox(object sender, KeyPressEventArgs e) // Запрет использовать что-либо, кроме букв в TextBox
 		{
-			ListBoxCheck();
+			if (!char.IsLetter(e.KeyChar))
+				e.Handled = true;
 		}
 
-		private void FilterSalaryNumericUpDown_ValueChanged(object sender, EventArgs e) // Изменение содежимого листбокса при изменении
+		private bool Comparison(int left, int condition, int right)
 		{
-			ListBoxCheck();
-		}
-
-		private void FilterTokenSalaryComboBox_SelectedIndexChanged(object sender, EventArgs e) // Изменение содежимого листбокса при изменении
-		{
-			ListBoxCheck();
-		}
-
-		private void FilterTimeNumericUpDown_ValueChanged(object sender, EventArgs e) // Изменение содежимого листбокса при изменении
-		{
-			ListBoxCheck();
-		}
-
-		private void FilterTokenTimeComboBox_SelectedIndexChanged(object sender, EventArgs e) // Изменение содежимого листбокса при изменении
-		{
-			ListBoxCheck();
-		}
-
-		private void FilterSalary_per_hourComboBox_SelectedIndexChanged(object sender, EventArgs e) // Изменение содежимого листбокса при изменении
-		{
-			ListBoxCheck();
+			return (condition % 2 == 0) ^ (left.CompareTo(right) + 1 == condition / 2);
 		}
 	}
 }

@@ -68,7 +68,7 @@
 			this.PaymentLabel = new System.Windows.Forms.Label();
 			this.PaymentTextBox = new System.Windows.Forms.TextBox();
 			this.FilterCheckBox = new System.Windows.Forms.CheckBox();
-			this.ListBox = new System.Windows.Forms.ListBox();
+			this.WorkersListBox = new System.Windows.Forms.ListBox();
 			((System.ComponentModel.ISupportInitialize)(this.SalaryNumericUpDown)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.TimeNumericUpDown)).BeginInit();
 			this.FilterGroupBox.SuspendLayout();
@@ -104,7 +104,7 @@
 			this.DeleteButton.TabIndex = 47;
 			this.DeleteButton.Text = "Видалити";
 			this.DeleteButton.UseVisualStyleBackColor = true;
-			this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+			this.DeleteButton.Click += new System.EventHandler(this.Change_delete);
 			// 
 			// NextButton
 			// 
@@ -124,7 +124,7 @@
 			this.UpdateButton.TabIndex = 45;
 			this.UpdateButton.Text = "Змінити";
 			this.UpdateButton.UseVisualStyleBackColor = true;
-			this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
+			this.UpdateButton.Click += new System.EventHandler(this.Change_delete);
 			// 
 			// InsertButton
 			// 
@@ -179,6 +179,7 @@
 			this.PatronymicTextBox.Name = "PatronymicTextBox";
 			this.PatronymicTextBox.Size = new System.Drawing.Size(100, 20);
 			this.PatronymicTextBox.TabIndex = 36;
+			this.PatronymicTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPress_TextBox);
 			// 
 			// NameTextBox
 			// 
@@ -186,6 +187,7 @@
 			this.NameTextBox.Name = "NameTextBox";
 			this.NameTextBox.Size = new System.Drawing.Size(100, 20);
 			this.NameTextBox.TabIndex = 35;
+			this.NameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPress_TextBox);
 			// 
 			// SurnameTextBox
 			// 
@@ -193,6 +195,7 @@
 			this.SurnameTextBox.Name = "SurnameTextBox";
 			this.SurnameTextBox.Size = new System.Drawing.Size(100, 20);
 			this.SurnameTextBox.TabIndex = 34;
+			this.SurnameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPress_TextBox);
 			// 
 			// TimeLabel
 			// 
@@ -355,17 +358,17 @@
 			this.FilterTokenTimeComboBox.ForeColor = System.Drawing.SystemColors.WindowText;
 			this.FilterTokenTimeComboBox.FormattingEnabled = true;
 			this.FilterTokenTimeComboBox.Items.AddRange(new object[] {
-            ">",
-            ">=",
-            "<",
             "<=",
+            ">",
+            "!=",
             "=",
-            "!="});
+            ">=",
+            "<"});
 			this.FilterTokenTimeComboBox.Location = new System.Drawing.Point(100, 72);
 			this.FilterTokenTimeComboBox.Name = "FilterTokenTimeComboBox";
 			this.FilterTokenTimeComboBox.Size = new System.Drawing.Size(34, 21);
 			this.FilterTokenTimeComboBox.TabIndex = 65;
-			this.FilterTokenTimeComboBox.SelectedIndexChanged += new System.EventHandler(this.FilterTokenTimeComboBox_SelectedIndexChanged);
+			this.FilterTokenTimeComboBox.SelectedIndexChanged += new System.EventHandler(this.ListBoxCheck);
 			// 
 			// FilterTokenSalaryComboBox
 			// 
@@ -374,17 +377,17 @@
 			this.FilterTokenSalaryComboBox.ForeColor = System.Drawing.SystemColors.WindowText;
 			this.FilterTokenSalaryComboBox.FormattingEnabled = true;
 			this.FilterTokenSalaryComboBox.Items.AddRange(new object[] {
-            ">",
-            ">=",
-            "<",
             "<=",
+            ">",
+            "!=",
             "=",
-            "!="});
+            ">=",
+            "<"});
 			this.FilterTokenSalaryComboBox.Location = new System.Drawing.Point(100, 45);
 			this.FilterTokenSalaryComboBox.Name = "FilterTokenSalaryComboBox";
 			this.FilterTokenSalaryComboBox.Size = new System.Drawing.Size(34, 21);
 			this.FilterTokenSalaryComboBox.TabIndex = 64;
-			this.FilterTokenSalaryComboBox.SelectedIndexChanged += new System.EventHandler(this.FilterTokenSalaryComboBox_SelectedIndexChanged);
+			this.FilterTokenSalaryComboBox.SelectedIndexChanged += new System.EventHandler(this.ListBoxCheck);
 			// 
 			// FilterSalary_per_hourLabel
 			// 
@@ -410,7 +413,7 @@
 			this.FilterSalary_per_hourComboBox.Name = "FilterSalary_per_hourComboBox";
 			this.FilterSalary_per_hourComboBox.Size = new System.Drawing.Size(140, 21);
 			this.FilterSalary_per_hourComboBox.TabIndex = 62;
-			this.FilterSalary_per_hourComboBox.SelectedIndexChanged += new System.EventHandler(this.FilterSalary_per_hourComboBox_SelectedIndexChanged);
+			this.FilterSalary_per_hourComboBox.SelectedIndexChanged += new System.EventHandler(this.ListBoxCheck);
 			// 
 			// FilterTimeNumericUpDown
 			// 
@@ -426,7 +429,7 @@
 			this.FilterTimeNumericUpDown.TabIndex = 61;
 			this.FilterTimeNumericUpDown.Tag = "";
 			this.FilterTimeNumericUpDown.ThousandsSeparator = true;
-			this.FilterTimeNumericUpDown.ValueChanged += new System.EventHandler(this.FilterTimeNumericUpDown_ValueChanged);
+			this.FilterTimeNumericUpDown.ValueChanged += new System.EventHandler(this.ListBoxCheck);
 			// 
 			// FilterSalaryNumericUpDown
 			// 
@@ -441,7 +444,7 @@
 			this.FilterSalaryNumericUpDown.Size = new System.Drawing.Size(100, 20);
 			this.FilterSalaryNumericUpDown.TabIndex = 60;
 			this.FilterSalaryNumericUpDown.ThousandsSeparator = true;
-			this.FilterSalaryNumericUpDown.ValueChanged += new System.EventHandler(this.FilterSalaryNumericUpDown_ValueChanged);
+			this.FilterSalaryNumericUpDown.ValueChanged += new System.EventHandler(this.ListBoxCheck);
 			// 
 			// FilterPostComboBox
 			// 
@@ -460,7 +463,7 @@
 			this.FilterPostComboBox.Name = "FilterPostComboBox";
 			this.FilterPostComboBox.Size = new System.Drawing.Size(140, 21);
 			this.FilterPostComboBox.TabIndex = 59;
-			this.FilterPostComboBox.SelectedIndexChanged += new System.EventHandler(this.FilterPostComboBox_SelectedIndexChanged);
+			this.FilterPostComboBox.SelectedIndexChanged += new System.EventHandler(this.ListBoxCheck);
 			// 
 			// FilterTimeLabel
 			// 
@@ -547,21 +550,21 @@
 			this.FilterCheckBox.UseVisualStyleBackColor = true;
 			this.FilterCheckBox.CheckedChanged += new System.EventHandler(this.FilterCheckBox_CheckedChanged);
 			// 
-			// ListBox
+			// WorkersListBox
 			// 
-			this.ListBox.FormattingEnabled = true;
-			this.ListBox.Location = new System.Drawing.Point(486, 175);
-			this.ListBox.Name = "ListBox";
-			this.ListBox.Size = new System.Drawing.Size(283, 225);
-			this.ListBox.TabIndex = 62;
-			this.ListBox.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
+			this.WorkersListBox.FormattingEnabled = true;
+			this.WorkersListBox.Location = new System.Drawing.Point(486, 175);
+			this.WorkersListBox.Name = "WorkersListBox";
+			this.WorkersListBox.Size = new System.Drawing.Size(283, 225);
+			this.WorkersListBox.TabIndex = 62;
+			this.WorkersListBox.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(805, 429);
-			this.Controls.Add(this.ListBox);
+			this.Controls.Add(this.WorkersListBox);
 			this.Controls.Add(this.FilterCheckBox);
 			this.Controls.Add(this.PaymentTextBox);
 			this.Controls.Add(this.PaymentLabel);
@@ -643,7 +646,7 @@
 		private System.Windows.Forms.CheckBox FilterTimeCheckBox;
 		private System.Windows.Forms.CheckBox FilterSalaryCheckBox;
 		private System.Windows.Forms.CheckBox FilterPostCheckBox;
-		private System.Windows.Forms.ListBox ListBox;
+		private System.Windows.Forms.ListBox WorkersListBox;
 	}
 }
 
