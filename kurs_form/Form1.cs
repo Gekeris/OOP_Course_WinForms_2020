@@ -103,6 +103,17 @@ namespace kurs_form
 				PaymentLabel.Hide();
 				PaymentTextBox.Hide();
 			}
+
+			int i = 0;
+			foreach (string s in ListBox.Items)
+			{
+				if (Current_worker.ToListBox() == s)
+				{
+					ListBox.SelectedIndex = i;
+					break;
+				}
+				i++;
+			}
 		}
 
 		private void NextButton_Click(object sender, EventArgs e)
@@ -148,6 +159,11 @@ namespace kurs_form
 				}
 			}
 			FirstButton_Click(sender, e);
+			FilterPostComboBox.SelectedIndex = 0;
+			FilterTokenSalaryComboBox.SelectedIndex = 0;
+			FilterTokenTimeComboBox.SelectedIndex = 0;
+			FilterSalary_per_hourComboBox.SelectedIndex = 0;
+			FilterPostComboBox.SelectedIndex = 0;
 		}
 
 		private void DeleteButton_Click(object sender, EventArgs e)
@@ -162,7 +178,6 @@ namespace kurs_form
 
 		private void Change_delete(object sender, EventArgs e, bool change)
 		{
-
 			string[] File;
 			using (StreamReader sr = new StreamReader("Base.txt", Encoding.UTF8)) // Полностью считываем файл и записываем содержимое в переменную
 			{
@@ -212,8 +227,6 @@ namespace kurs_form
 				FilterGroupBox.Enabled = true;
 			else
 				FilterGroupBox.Enabled = false;
-			
-			
 		}
 
 		private void FilterPostCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -222,6 +235,7 @@ namespace kurs_form
 				FilterPostComboBox.Enabled = true;
 			else
 				FilterPostComboBox.Enabled = false;
+			ListBoxCheck();
 		}
 
 		private void FilterSalaryCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -236,6 +250,7 @@ namespace kurs_form
 				FilterTokenSalaryComboBox.Enabled = false;
 				FilterSalaryNumericUpDown.Enabled = false;
 			}
+			ListBoxCheck();
 		}
 
 		private void FilterTimeCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -250,6 +265,7 @@ namespace kurs_form
 				FilterTokenTimeComboBox.Enabled = false;
 				FilterTimeNumericUpDown.Enabled = false;
 			}
+			ListBoxCheck();
 		}
 
 		private void FilterSalary_per_hourCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -258,6 +274,7 @@ namespace kurs_form
 				FilterSalary_per_hourComboBox.Enabled = true;
 			else
 				FilterSalary_per_hourComboBox.Enabled = false;
+			ListBoxCheck();
 		}
 
 		private bool FilterCheck(Worker w)
@@ -347,6 +364,60 @@ namespace kurs_form
 				}
 			}
 			return true;
+		}
+
+		private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			foreach (Worker w in workers)
+			{
+				if (w.ToListBox() == ListBox.SelectedItem.ToString())
+				{
+					Current_worker = w;
+					break;
+				}
+			}
+			Show_new_worker();
+		}
+
+		private void ListBoxCheck()
+		{
+			ListBox.Items.Clear();
+			foreach (Worker w in workers)
+			{
+				if (FilterCheck(w))
+					ListBox.Items.Add(w.ToListBox());
+			}
+			Show_new_worker();
+		}
+
+		private void FilterPostComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ListBoxCheck();
+		}
+
+		private void FilterSalaryNumericUpDown_ValueChanged(object sender, EventArgs e)
+		{
+			ListBoxCheck();
+		}
+
+		private void FilterTokenSalaryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ListBoxCheck();
+		}
+
+		private void FilterTimeNumericUpDown_ValueChanged(object sender, EventArgs e)
+		{
+			ListBoxCheck();
+		}
+
+		private void FilterTokenTimeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ListBoxCheck();
+		}
+
+		private void FilterSalary_per_hourComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ListBoxCheck();
 		}
 	}
 }

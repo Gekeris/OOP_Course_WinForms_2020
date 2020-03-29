@@ -28,8 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-			this.button10 = new System.Windows.Forms.Button();
 			this.Close = new System.Windows.Forms.Button();
 			this.LastButton = new System.Windows.Forms.Button();
 			this.DeleteButton = new System.Windows.Forms.Button();
@@ -70,6 +68,7 @@
 			this.PaymentLabel = new System.Windows.Forms.Label();
 			this.PaymentTextBox = new System.Windows.Forms.TextBox();
 			this.FilterCheckBox = new System.Windows.Forms.CheckBox();
+			this.ListBox = new System.Windows.Forms.ListBox();
 			((System.ComponentModel.ISupportInitialize)(this.SalaryNumericUpDown)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.TimeNumericUpDown)).BeginInit();
 			this.FilterGroupBox.SuspendLayout();
@@ -77,30 +76,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.FilterSalaryNumericUpDown)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// richTextBox1
-			// 
-			this.richTextBox1.Location = new System.Drawing.Point(493, 279);
-			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.Size = new System.Drawing.Size(276, 115);
-			this.richTextBox1.TabIndex = 53;
-			this.richTextBox1.Text = "";
-			// 
-			// button10
-			// 
-			this.button10.Location = new System.Drawing.Point(583, 250);
-			this.button10.Name = "button10";
-			this.button10.Size = new System.Drawing.Size(99, 23);
-			this.button10.TabIndex = 52;
-			this.button10.Text = "Запит доцентів";
-			this.button10.UseVisualStyleBackColor = true;
-			// 
 			// Close
 			// 
 			this.Close.Location = new System.Drawing.Point(380, 338);
 			this.Close.Name = "Close";
 			this.Close.Size = new System.Drawing.Size(75, 23);
 			this.Close.TabIndex = 50;
-			this.Close.Text = "Close";
+			this.Close.Text = "Закрити";
 			this.Close.UseVisualStyleBackColor = true;
 			this.Close.Click += new System.EventHandler(this.CloseButton_Click);
 			// 
@@ -110,7 +92,7 @@
 			this.LastButton.Name = "LastButton";
 			this.LastButton.Size = new System.Drawing.Size(75, 23);
 			this.LastButton.TabIndex = 49;
-			this.LastButton.Text = "Last";
+			this.LastButton.Text = "Останній";
 			this.LastButton.UseVisualStyleBackColor = true;
 			this.LastButton.Click += new System.EventHandler(this.LastButton_Click);
 			// 
@@ -120,7 +102,7 @@
 			this.DeleteButton.Name = "DeleteButton";
 			this.DeleteButton.Size = new System.Drawing.Size(75, 23);
 			this.DeleteButton.TabIndex = 47;
-			this.DeleteButton.Text = "Delete";
+			this.DeleteButton.Text = "Видалити";
 			this.DeleteButton.UseVisualStyleBackColor = true;
 			this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
 			// 
@@ -130,7 +112,7 @@
 			this.NextButton.Name = "NextButton";
 			this.NextButton.Size = new System.Drawing.Size(75, 23);
 			this.NextButton.TabIndex = 46;
-			this.NextButton.Text = "Next";
+			this.NextButton.Text = "Наступний";
 			this.NextButton.UseVisualStyleBackColor = true;
 			this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
 			// 
@@ -140,7 +122,7 @@
 			this.UpdateButton.Name = "UpdateButton";
 			this.UpdateButton.Size = new System.Drawing.Size(75, 23);
 			this.UpdateButton.TabIndex = 45;
-			this.UpdateButton.Text = "Update";
+			this.UpdateButton.Text = "Змінити";
 			this.UpdateButton.UseVisualStyleBackColor = true;
 			this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
 			// 
@@ -150,7 +132,7 @@
 			this.InsertButton.Name = "InsertButton";
 			this.InsertButton.Size = new System.Drawing.Size(75, 23);
 			this.InsertButton.TabIndex = 44;
-			this.InsertButton.Text = "Insert";
+			this.InsertButton.Text = "Додати";
 			this.InsertButton.UseVisualStyleBackColor = true;
 			this.InsertButton.Click += new System.EventHandler(this.InsertButton_Click);
 			// 
@@ -160,7 +142,7 @@
 			this.PrevButton.Name = "PrevButton";
 			this.PrevButton.Size = new System.Drawing.Size(75, 23);
 			this.PrevButton.TabIndex = 43;
-			this.PrevButton.Text = "Prev";
+			this.PrevButton.Text = "Попередній";
 			this.PrevButton.UseVisualStyleBackColor = true;
 			this.PrevButton.Click += new System.EventHandler(this.PrevButton_Click);
 			// 
@@ -170,7 +152,7 @@
 			this.FirstButton.Name = "FirstButton";
 			this.FirstButton.Size = new System.Drawing.Size(75, 23);
 			this.FirstButton.TabIndex = 42;
-			this.FirstButton.Text = "First";
+			this.FirstButton.Text = "Перший";
 			this.FirstButton.UseVisualStyleBackColor = true;
 			this.FirstButton.Click += new System.EventHandler(this.FirstButton_Click);
 			// 
@@ -383,6 +365,7 @@
 			this.FilterTokenTimeComboBox.Name = "FilterTokenTimeComboBox";
 			this.FilterTokenTimeComboBox.Size = new System.Drawing.Size(34, 21);
 			this.FilterTokenTimeComboBox.TabIndex = 65;
+			this.FilterTokenTimeComboBox.SelectedIndexChanged += new System.EventHandler(this.FilterTokenTimeComboBox_SelectedIndexChanged);
 			// 
 			// FilterTokenSalaryComboBox
 			// 
@@ -401,6 +384,7 @@
 			this.FilterTokenSalaryComboBox.Name = "FilterTokenSalaryComboBox";
 			this.FilterTokenSalaryComboBox.Size = new System.Drawing.Size(34, 21);
 			this.FilterTokenSalaryComboBox.TabIndex = 64;
+			this.FilterTokenSalaryComboBox.SelectedIndexChanged += new System.EventHandler(this.FilterTokenSalaryComboBox_SelectedIndexChanged);
 			// 
 			// FilterSalary_per_hourLabel
 			// 
@@ -426,6 +410,7 @@
 			this.FilterSalary_per_hourComboBox.Name = "FilterSalary_per_hourComboBox";
 			this.FilterSalary_per_hourComboBox.Size = new System.Drawing.Size(140, 21);
 			this.FilterSalary_per_hourComboBox.TabIndex = 62;
+			this.FilterSalary_per_hourComboBox.SelectedIndexChanged += new System.EventHandler(this.FilterSalary_per_hourComboBox_SelectedIndexChanged);
 			// 
 			// FilterTimeNumericUpDown
 			// 
@@ -441,6 +426,7 @@
 			this.FilterTimeNumericUpDown.TabIndex = 61;
 			this.FilterTimeNumericUpDown.Tag = "";
 			this.FilterTimeNumericUpDown.ThousandsSeparator = true;
+			this.FilterTimeNumericUpDown.ValueChanged += new System.EventHandler(this.FilterTimeNumericUpDown_ValueChanged);
 			// 
 			// FilterSalaryNumericUpDown
 			// 
@@ -455,6 +441,7 @@
 			this.FilterSalaryNumericUpDown.Size = new System.Drawing.Size(100, 20);
 			this.FilterSalaryNumericUpDown.TabIndex = 60;
 			this.FilterSalaryNumericUpDown.ThousandsSeparator = true;
+			this.FilterSalaryNumericUpDown.ValueChanged += new System.EventHandler(this.FilterSalaryNumericUpDown_ValueChanged);
 			// 
 			// FilterPostComboBox
 			// 
@@ -473,6 +460,7 @@
 			this.FilterPostComboBox.Name = "FilterPostComboBox";
 			this.FilterPostComboBox.Size = new System.Drawing.Size(140, 21);
 			this.FilterPostComboBox.TabIndex = 59;
+			this.FilterPostComboBox.SelectedIndexChanged += new System.EventHandler(this.FilterPostComboBox_SelectedIndexChanged);
 			// 
 			// FilterTimeLabel
 			// 
@@ -551,7 +539,7 @@
 			// FilterCheckBox
 			// 
 			this.FilterCheckBox.AutoSize = true;
-			this.FilterCheckBox.Location = new System.Drawing.Point(434, 12);
+			this.FilterCheckBox.Location = new System.Drawing.Point(680, 25);
 			this.FilterCheckBox.Name = "FilterCheckBox";
 			this.FilterCheckBox.Size = new System.Drawing.Size(62, 17);
 			this.FilterCheckBox.TabIndex = 61;
@@ -559,11 +547,21 @@
 			this.FilterCheckBox.UseVisualStyleBackColor = true;
 			this.FilterCheckBox.CheckedChanged += new System.EventHandler(this.FilterCheckBox_CheckedChanged);
 			// 
+			// ListBox
+			// 
+			this.ListBox.FormattingEnabled = true;
+			this.ListBox.Location = new System.Drawing.Point(486, 175);
+			this.ListBox.Name = "ListBox";
+			this.ListBox.Size = new System.Drawing.Size(283, 225);
+			this.ListBox.TabIndex = 62;
+			this.ListBox.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.ClientSize = new System.Drawing.Size(805, 429);
+			this.Controls.Add(this.ListBox);
 			this.Controls.Add(this.FilterCheckBox);
 			this.Controls.Add(this.PaymentTextBox);
 			this.Controls.Add(this.PaymentLabel);
@@ -572,8 +570,6 @@
 			this.Controls.Add(this.FilterGroupBox);
 			this.Controls.Add(this.TimeNumericUpDown);
 			this.Controls.Add(this.SalaryNumericUpDown);
-			this.Controls.Add(this.richTextBox1);
-			this.Controls.Add(this.button10);
 			this.Controls.Add(this.Close);
 			this.Controls.Add(this.LastButton);
 			this.Controls.Add(this.DeleteButton);
@@ -593,7 +589,7 @@
 			this.Controls.Add(this.NameLabel);
 			this.Controls.Add(this.SurnameLabel);
 			this.Name = "Form1";
-			this.Text = "Form1";
+			this.Text = "База працівників навчального закладу";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			((System.ComponentModel.ISupportInitialize)(this.SalaryNumericUpDown)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.TimeNumericUpDown)).EndInit();
@@ -607,9 +603,6 @@
 		}
 
 		#endregion
-
-		private System.Windows.Forms.RichTextBox richTextBox1;
-		private System.Windows.Forms.Button button10;
 		private System.Windows.Forms.Button Close;
 		private System.Windows.Forms.Button LastButton;
 		private System.Windows.Forms.Button DeleteButton;
@@ -650,6 +643,7 @@
 		private System.Windows.Forms.CheckBox FilterTimeCheckBox;
 		private System.Windows.Forms.CheckBox FilterSalaryCheckBox;
 		private System.Windows.Forms.CheckBox FilterPostCheckBox;
+		private System.Windows.Forms.ListBox ListBox;
 	}
 }
 

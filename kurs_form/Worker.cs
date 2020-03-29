@@ -45,7 +45,7 @@ namespace kurs_form
 			return $"{Surname};{Name};{Patronymic};{Post};{Salary};{Time};{Salary_per_hour}";
 		}
 
-		public string PIB() // Для сортировки
+		public string ToListBox() // Для списка
 		{
 			return $"{Surname} {Name} {Patronymic}";
 		}
