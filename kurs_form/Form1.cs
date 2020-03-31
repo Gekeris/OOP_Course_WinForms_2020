@@ -33,17 +33,25 @@ namespace kurs_form
 			string patronymic_insert = PatronymicTextBox.Text;
 			string post_insert = PostComboBox.Text;
 			int salary_insert = Convert.ToInt32(SalaryNumericUpDown.Value);
-			int time_insert = Convert.ToInt32(SalaryNumericUpDown.Value);
+			int time_insert = Convert.ToInt32(TimeNumericUpDown.Value);
 
-			bool repeat = true;
-			foreach (string s in WorkersListBox.Items)
+			bool Duplicate = (surname_insert == "") || (name_insert == "") || (patronymic_insert == "");
+			foreach (string s in WorkersListBox.Items) // Проверяем все элементы на то, есть ли дубликат
 			{
-				if (s == $"{surname_insert} {name_insert} {patronymic_insert}")
+				if ((s == $"{surname_insert} {name_insert} {patronymic_insert}") || Duplicate)
 				{
-					repeat = false;
+					Duplicate = true;
+					break;
 				}
 			}
-			if (repeat)
+			if (Duplicate)
+			{
+				using (ErrorForm error = new ErrorForm()) // вывод окна с ошибкой
+				{
+					error.ShowDialog();
+				}
+			}
+			else
 			{
 				if (PerHourRadioButton.Checked) // В зависимости от выбора дабавляем элемент в лист
 					workers.AddLast(new PerHour(surname_insert, name_insert, patronymic_insert, post_insert, salary_insert, time_insert));
@@ -57,7 +65,7 @@ namespace kurs_form
 
 				Current_worker = workers.Last(); // Устанавливаем добавленого рабочего как текущего и отображаем его
 				index = workers.Count() - 1;
-				ShowCurentWorker();
+				ListBoxCheck(sender,e);
 			}
 		}
 
@@ -72,7 +80,7 @@ namespace kurs_form
 					break;
 				}
 			}
-			ShowCurentWorker(); // Отображаем текущего рабочего
+			ShowCurrentWorker(); // Отображаем текущего рабочего
 		}
 
 		private void LastButton_Click(object sender, EventArgs e) // Ищем последнего рабочего который подходит
@@ -86,48 +94,53 @@ namespace kurs_form
 					break;
 				}
 			}
-			ShowCurentWorker(); // Отображаем текущего рабочего
+			ShowCurrentWorker(); // Отображаем текущего рабочего
 		}
 
-		private void ShowCurentWorker() // Отображаем текущего рабочего
+		private void ShowCurrentWorker() // Отображаем текущего рабочего
 		{
-			SurnameTextBox.Text = Current_worker.Surname; // Считываем данные с текущего рабочего и выводим их 
-			NameTextBox.Text = Current_worker.Name;
-			PatronymicTextBox.Text = Current_worker.Patronymic;
-			PostComboBox.Text = Current_worker.Post;
-			SalaryNumericUpDown.Value = Current_worker.Salary;
-			TimeNumericUpDown.Value = Current_worker.Time;
+			if (Current_worker != null)
+			{
+				SurnameTextBox.Text = Current_worker.Surname; // Считываем данные с текущего рабочего и выводим их 
+				NameTextBox.Text = Current_worker.Name;
+				PatronymicTextBox.Text = Current_worker.Patronymic;
+				PostComboBox.Text = Current_worker.Post;
+				SalaryNumericUpDown.Value = Current_worker.Salary;
+				TimeNumericUpDown.Value = Current_worker.Time;
 
-			if (Current_worker.Salary_per_hour) // Если почасовая оплата, то измененяем поля с выводом данных
-			{
-				SalaryLabel.Text = "Ціна 1 год.";
-				PerHourRadioButton.Checked = true;
-				PaymentLabel.Show();
-				PaymentTextBox.Text = Current_worker.Payment().ToString();
-				PaymentTextBox.Show();
-			}
-			else
-			{
-				SalaryLabel.Text = "Зарплата";
-				FixedRadioButton.Checked = true;
-				PaymentLabel.Hide();
-				PaymentTextBox.Hide();
-			}
-
-			int i = 0;
-			foreach (string s in WorkersListBox.Items) // Проверяем все элементы в листбоксе, пока не найдём текущий элемент
-			{
-				if (Current_worker.ToListBox() == s)
+				if (Current_worker.Salary_per_hour) // Если почасовая оплата, то измененяем поля с выводом данных
 				{
-					WorkersListBox.SelectedIndex = i; // Когда нашли, выделяем его
-					break;
+					SalaryLabel.Text = "Ціна 1 год.";
+					PerHourRadioButton.Checked = true;
+					PaymentLabel.Show();
+					PaymentTextBox.Text = Current_worker.Payment().ToString();
+					PaymentTextBox.Show();
 				}
-				i++;
+				else
+				{
+					SalaryLabel.Text = "Зарплата";
+					FixedRadioButton.Checked = true;
+					PaymentLabel.Hide();
+					PaymentTextBox.Hide();
+				}
+
+				int i = 0;
+				foreach (string s in WorkersListBox.Items) // Проверяем все элементы в листбоксе, пока не найдём текущий элемент
+				{
+					if (Current_worker.ToListBox() == s)
+					{
+						WorkersListBox.SelectedIndex = i; // Когда нашли, выделяем его
+						break;
+					}
+					i++;
+				}
 			}
 		}
 
 		private void NextButton_Click(object sender, EventArgs e) // Следующий подходящий работник
 		{
+			if (index + 1 >= workers.Count()) // Для устранения бага, при удалении последнего элемента
+				LastButton_Click(sender, e);
 			for (int i = index + 1; i < workers.Count(); i++) // Проверяем всех рабочих, от текущего и до конца
 			{
 				if (FilterCheck(workers.ElementAt(i))) // Если подходит по фильтру делаем его текущим
@@ -137,7 +150,7 @@ namespace kurs_form
 					break;
 				}
 			}
-			ShowCurentWorker();
+			ShowCurrentWorker();
 		}
 
 		private void PrevButton_Click(object sender, EventArgs e) // Предыдущий подходящий работник
@@ -151,11 +164,14 @@ namespace kurs_form
 					break;
 				}
 			}
-			ShowCurentWorker();
+			ShowCurrentWorker();
 		}
 
 		private void Form1_Load(object sender, EventArgs e) // Выполняеться при запуске программы
 		{
+			if (!File.Exists("Base.txt")) // Если нету файла базы, создать
+				File.WriteAllText("Base.txt", "");
+
 			using (StreamReader Sr = new StreamReader("Base.txt", Encoding.UTF8))
 			{
 				string[] Lines = Sr.ReadToEnd().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries); // Делим файл по строкам и удаляем пустые
@@ -169,6 +185,7 @@ namespace kurs_form
 				}
 			}
 			FirstButton_Click(sender, e); // Отображаем первого рабочего в списке
+			index = 0;
 			FilterPostComboBox.SelectedIndex = 0; // Стандартные настройки фильтра, чтобы в фильтре не было ошибок с пустой строкой
 			FilterTokenSalaryComboBox.SelectedIndex = 0;
 			FilterTokenTimeComboBox.SelectedIndex = 0;
@@ -179,7 +196,7 @@ namespace kurs_form
 		private void Change_delete(object sender, EventArgs e)
 		{
 			bool change = true;
-			if (sender.ToString() == "System.Windows.Forms.Button, Text: Видалити")
+			if (sender.ToString() == "System.Windows.Forms.Button, Text: Видалити") // Если вызывается кнопкой удаления
 				change = false;
 
 			string[] File;
@@ -197,7 +214,7 @@ namespace kurs_form
 						File[i] = modified; // Изменяем строку, в которой был прошлый еелмент
 						LinkedListNode<Worker> ph = workers.Find(Current_worker).Previous; // Узнаем предыдущего рабочего
 						workers.Remove(Current_worker); // Удаляем текущего рабочего
-						
+
 						if (PerHourRadioButton.Checked) // Изменяем текущего рабочего 
 							Current_worker = new PerHour(modified.Split(';'));
 						else
@@ -207,7 +224,7 @@ namespace kurs_form
 							workers.AddAfter(ph, Current_worker);
 						else
 							workers.AddFirst(Current_worker);
-						ShowCurentWorker();
+						ShowCurrentWorker();
 					}
 					else if ((Current_worker.ToFile() == File[i]) && !change) // Если удаляем и это та строка, которая надо
 					{
@@ -220,7 +237,7 @@ namespace kurs_form
 			}
 			if (!change)
 				NextButton_Click(sender, e);
-			ListBoxCheck(sender,e);
+			ListBoxCheck(sender, e);
 		}
 
 		private void FilterCheckBox_CheckedChanged(object sender, EventArgs e) // Активация фильтра
@@ -313,31 +330,36 @@ namespace kurs_form
 
 		private void ListBox_SelectedIndexChanged(object sender, EventArgs e) // Выбор элемента в списке
 		{
+			int i = 0;
 			foreach (Worker w in workers)
 			{
 				if (w.ToListBox() == WorkersListBox.SelectedItem.ToString())
 				{
 					Current_worker = w;
+					index = i;
 					break;
 				}
+				i++;
 			}
-			ShowCurentWorker();
+			ShowCurrentWorker();
 		}
 
 		private void ListBoxCheck(object sender, EventArgs e) // Отображение содержимого листбокса. Вызывается при изменении настроек фильтра.
 		{
+			if (!FilterCheck(Current_worker)) // Если текущий элемент не подходит, выбирает первый доступный элемент
+				FirstButton_Click(sender, e);
 			WorkersListBox.Items.Clear();
 			foreach (Worker w in workers)
 			{
 				if (FilterCheck(w))
 					WorkersListBox.Items.Add(w.ToListBox());
 			}
-			ShowCurentWorker();
+			ShowCurrentWorker();
 		}
 
-		private void KeyPress_TextBox(object sender, KeyPressEventArgs e) // Запрет использовать что-либо, кроме букв в TextBox
+		private void KeyPress_TextBox(object sender, KeyPressEventArgs e) // Запрет использовать что-либо, кроме букв и тире в TextBox
 		{
-			if (!char.IsLetter(e.KeyChar))
+			if (!char.IsLetter(e.KeyChar) && !((e.KeyChar == '\b') || (e.KeyChar == '-')))
 				e.Handled = true;
 		}
 
